@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siti Nursyazmina - Student Bento Grid Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /*
+        * ----------------------------------------
+        * CSS Variables & Base Styles
+        * ----------------------------------------
+        */
+        :root {
+            /* Color Palette */
+            --color-white: #ffffff;
+            --color-light-grey: #f7f9fb;
+            --color-medium-grey: #e6eaf0;
+            --color-dark-grey: #3c4858;
+            --color-accent: #004b8d; /* Deep Ocean Blue accent */
+
+            /* Typography */
+            --font-family-sans: 'Inter', sans-serif;
+
+            /* Spacing */
+            --spacing-unit: 1rem;
+            --spacing-small: 0.5rem;
+            --spacing-medium: 1rem;
+            --spacing-large: 2rem;
+
+            /* Border Radius */
+            --border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-sans);
+            background-color: var(--color-light-grey);
+            color: var(--color-dark-grey);
+            line-height: 1.6;
+            padding: var(--spacing-large);
+        }
+
+        /*
+        * ----------------------------------------
+        * Bento Grid Layout
+        * ----------------------------------------
+        */
+        .bento-grid-container {
+            display: grid;
+            gap: var(--spacing-medium);
+            max-width: 1200px;
+            margin: 0 auto;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns for desktop */
+            grid-auto-rows: minmax(150px, auto); /* Base row height */
+        }
+
+        .bento-card {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-medium-grey);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-medium);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-header {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-small);
+            text-transform: uppercase;
+        }
+
+        .card-content {
+            flex-grow: 1;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-small);
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--color-dark-grey);
+            opacity: 0.8;
+            margin-bottom: var(--spacing-medium);
+        }
+
+        /*
+        * ----------------------------------------
+        * Card Size Definitions (Desktop)
+        * ----------------------------------------
+        */
+
+        /* Card 1 (Profile): Large box (2x2) */
+        .card-profile {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        /* Card 2 (Location): Small box (1x1) */
+        .card-location {
+            grid-column: span 1;
+            grid-row: span 1;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Card 3 (Tech Stack): Medium box (1x2) */
+        .card-tech-stack {
+            grid-column: span 1;
+            grid-row: span 2;
+        }
+
+        /* Card 4 (Case Study): Medium box (2x1) */
+        .card-case-study {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        /* Card 5 (Hobby): Small box (1x1) */
+        .card-hobby {
+            grid-column: span 1;
+            grid-row: span 1;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Card 6 (Playlist): Wide box (4x1) */
+        .card-playlist {
+            grid-column: 1 / -1; /* Span all 4 columns */
+            grid-row: auto;
+            min-height: 100px;
+        }
+
+        /*
+        * ----------------------------------------
+        * Card Specific Styles
+        * ----------------------------------------
+        */
+
+        /* Profile Card */
+        .profile-links {
+            margin-top: auto;
+            padding-top: var(--spacing-medium);
+            border-top: 1px solid var(--color-medium-grey);
+        }
+
+        .profile-links a {
+            color: var(--color-dark-grey);
+            text-decoration: none;
+            margin-right: var(--spacing-medium);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .profile-links a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Location Card */
+        .time-display {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: var(--spacing-small);
+        }
+        
+        /* Time Function (Placeholder for dynamic time) */
+        #current-time {
+            display: block;
+            margin-top: var(--spacing-small);
+        }
+
+        /* Tech Stack Card */
+        .subject-list {
+            list-style: none;
+            padding: 0;
+            margin-top: var(--spacing-small);
+        }
+
+        .subject-list li {
+            background-color: var(--color-light-grey);
+            border-radius: 4px;
+            padding: 0.3rem 0.6rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-right: var(--spacing-small);
+            border: 1px solid var(--color-medium-grey);
+        }
+
+        /* Playlist Card */
+        .music-player-placeholder {
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            padding: var(--spacing-medium);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /*
+        * ----------------------------------------
+        * Responsive Design (Mobile)
+        * ----------------------------------------
+        */
+        @media (max-width: 768px) {
+            .bento-grid-container {
+                grid-template-columns: 1fr; /* Single column on mobile */
+                grid-auto-rows: auto;
+            }
+
+            /* Reset all grid spans to auto-flow in a single column */
+            .bento-card {
+                grid-column: auto !important;
+                grid-row: auto !important;
+                min-height: 150px; /* Ensure cards have some height on mobile */
+            }
+
+            .card-profile {
+                min-height: 250px;
+            }
+
+            .card-location, .card-hobby {
+                min-height: 120px;
+            }
+
+            .title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bento-grid-container">
+
+        <div class="bento-card card-profile">
+            <div class="card-header">Student Profile</div>
+            <div class="card-content">
+                <h1 class="title">SITI NURSYAZMINA</h1>
+                <p class="subtitle">B.Sc. Food Technology (Year 1)</p>
+                <p>**Innovating food safety.** Committed to exploring sustainable processes and analytical methods in the food industry.</p>
+            </div>
+            <div class="profile-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">GitHub</a>
+                <a href="#">UMT Portal</a>
+            </div>
+        </div>
+
+        <div class="bento-card card-location">
+            <div class="card-header">Location & Time</div>
+            <div class="card-content">
+                <p>UMT, Kuala Nerus</p>
+                <span class="time-display" id="current-time">2:31 PM</span>
+            </div>
+        </div>
+
+        <div class="bento-card card-tech-stack">
+            <div class="card-header">Core Competencies</div>
+            <div class="card-content">
+                <p class="subtitle">Key Academic Skills:</p>
+                <ul class="subject-list">
+                    <li>Food Chemistry</li>
+                    <li>Food Microbiology</li>
+                    <li>Excel Proficiency</li>
+                    <li>Lab Analysis Techniques</li>
+                    <li>Food Processing</li>
+                    <li>Quality Control</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bento-card card-case-study">
+            <div class="card-header">Food Science Case Study</div>
+            <div class="card-content">
+                <h2 class="title">Starch Gelatinization in Local Kuih</h2>
+                <p>Analyzing texture profiles, moisture content, and ingredient interactions during the preparation of traditional **Kuih Lapis**.</p>
+            </div>
+        </div>
+
+        <div class="bento-card card-hobby">
+            <div class="card-header">Leisure & Wellness</div>
+            <div class="card-content">
+                <h2 class="title">Badminton & Beach Walks</h2>
+                <p>Regularly playing badminton and enjoying evening walks at Pantai UMT.</p>
+            </div>
+        </div>
+
+        <div class="bento-card card-playlist">
+            <div class="card-header">Study Soundtrack</div>
+            <div class="card-content">
+                <div class="music-player-placeholder">
+                    🎧 **[Music Player Widget Placeholder]** Focused on ambient study mixes.
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <script>
+        // Simple JavaScript to display the current time dynamically (optional, but good practice)
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        // Update time immediately and then every minute
+        updateTime();
+        setInterval(updateTime, 60000); 
+    </script>
+
+</body>
+</html>
