@@ -72,7 +72,6 @@
         }
 
         .bento-card:hover {
-            /* Subtle Zoom/Scale effect */
             transform: translateY(-4px) scale(1.01);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
@@ -108,24 +107,20 @@
         * ----------------------------------------
         */
 
-        /* Card 1 (Profile): Large box (2x2) */
         .card-profile {
             grid-column: span 2;
             grid-row: span 2;
-            /* === BACKGROUND IMAGE & TEXT STYLES (NEW) === */
-            background-image: url('bg.jpg'); /* Set the image path */
-            background-size: cover;          /* Scale the image to cover the card */
-            background-position: center;     /* Center the image */
-            background-repeat: no-repeat;    /* Prevent tiling */
-            color: var(--color-white);       /* Change main text to white for contrast */
-            /* Add a subtle overlay effect for better text readability (optional, but good practice) */
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: var(--color-white);
             position: relative; 
             z-index: 1;
             overflow: hidden;
-            border: none; /* Remove border if using image */
+            border: none;
         }
         
-        /* Optional: Adding a dark overlay for better text contrast */
         .card-profile::before {
             content: '';
             position: absolute;
@@ -133,16 +128,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.3); /* Dark overlay */
+            background: rgba(0, 0, 0, 0.3);
             border-radius: var(--border-radius);
             z-index: -1;
         }
-        /* End Optional Overlay */
 
-
-        /* Adjust text colors for the Profile Card to ensure readability */
         .card-profile .card-header {
-            color: var(--color-light-grey); /* Lighter accent for the header text */
+            color: var(--color-light-grey);
         }
 
         .card-profile .subtitle {
@@ -150,7 +142,6 @@
             opacity: 0.9;
         }
 
-        /* Card 2 (Location): Small box (1x1) */
         .card-location {
             grid-column: span 1;
             grid-row: span 1;
@@ -159,19 +150,25 @@
             text-align: center;
         }
 
-        /* Card 3 (Tech Stack): Medium box (1x2) */
         .card-tech-stack {
             grid-column: span 1;
             grid-row: span 2;
         }
 
-        /* Card 4 (Case Study): Medium box (2x1) */
         .card-case-study {
             grid-column: span 2;
             grid-row: span 1;
         }
 
-        /* Card 5 (Hobby): Small box (1x1) */
+        /* NEW: Inner Grid for Case Study Card to create two columns */
+        .case-study-inner {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: var(--spacing-medium);
+            align-items: center;
+            height: 100%;
+        }
+
         .card-hobby {
             grid-column: span 1;
             grid-row: span 1;
@@ -180,13 +177,11 @@
             text-align: center;
         }
         
-        /* Card 7 (Reflection): Small box (1x1) */
         .card-reflection {
             grid-column: span 1;
             grid-row: span 1;
         }
 
-        /* Card 6 (Playlist): Wide box (4x1) */
         .card-playlist {
             grid-column: 1 / -1; 
             grid-row: auto;
@@ -199,15 +194,14 @@
         * ----------------------------------------
         */
 
-        /* Profile Card Links - Adjusted for dark background */
         .profile-links {
             margin-top: auto;
             padding-top: var(--spacing-medium);
-            border-top: 1px solid rgba(255, 255, 255, 0.4); /* Lighter border for contrast */
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         .profile-links a {
-            color: var(--color-white); /* Ensure links are white */
+            color: var(--color-white);
             text-decoration: none;
             margin-right: var(--spacing-medium);
             font-weight: 600;
@@ -215,22 +209,15 @@
         }
 
         .profile-links a:hover {
-            color: var(--color-light-grey); /* Subtle hover effect */
+            color: var(--color-light-grey);
         }
 
-        /* Location Card */
         .time-display {
             font-size: 2rem;
             font-weight: 700;
             margin-top: var(--spacing-small);
         }
-        
-        #current-time {
-            display: block;
-            margin-top: var(--spacing-small);
-        }
 
-        /* Tech Stack Card */
         .subject-list {
             list-style: none;
             padding: 0;
@@ -248,7 +235,27 @@
             border: 1px solid var(--color-medium-grey);
         }
 
-        /* Playlist Card */
+        /* NEW: Lab Timer Button Styles */
+        .btn-lab-timer {
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            white-space: nowrap;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-lab-timer:hover {
+            background-color: #003366;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
         .music-player-placeholder {
             background-color: var(--color-accent);
             color: var(--color-white);
@@ -264,23 +271,28 @@
         */
         @media (max-width: 768px) {
             .bento-grid-container {
-                grid-template-columns: 1fr; /* Single column on mobile */
-                grid-auto-rows: auto;
+                grid-template-columns: 1fr;
             }
 
-            /* Reset all grid spans to auto-flow in a single column */
             .bento-card {
                 grid-column: auto !important;
                 grid-row: auto !important;
-                min-height: 150px; /* Ensure cards have some height on mobile */
+                min-height: 150px;
+            }
+
+            /* Stack columns on mobile */
+            .case-study-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .btn-lab-timer {
+                margin-top: var(--spacing-medium);
+                display: block;
             }
 
             .card-profile {
                 min-height: 250px;
-            }
-
-            .card-location, .card-hobby, .card-reflection {
-                min-height: 120px;
             }
 
             .title {
@@ -311,7 +323,7 @@
             <div class="card-header">Location & Time</div>
             <div class="card-content">
                 <p>UMT, Kuala Nerus</p>
-                <span class="time-display" id="current-time">2:31 PM</span>
+                <span class="time-display" id="current-time">--:--</span>
             </div>
         </div>
 
@@ -332,9 +344,14 @@
 
         <div class="bento-card card-case-study">
             <div class="card-header">Food Science Case Study</div>
-            <div class="card-content">
-                <h2 class="title">Starch Gelatinization in Local Kuih</h2>
-                <p>Analyzing texture profiles, moisture content, and ingredient interactions during the preparation of traditional **Kuih Lapis**.</p>
+            <div class="case-study-inner">
+                <div class="card-content">
+                    <h2 class="title">Starch Gelatinization in Local Kuih</h2>
+                    <p>Analyzing texture profiles, moisture content, and ingredient interactions during the preparation of traditional **Kuih Lapis**.</p>
+                </div>
+                <div class="card-action">
+                    <a href="https://s80064.github.io/lab-timer-app/" class="btn-lab-timer" target="_blank">Try My Lab Timer App</a>
+                </div>
             </div>
         </div>
 
@@ -358,7 +375,7 @@
             <div class="card-header">Study Soundtrack</div>
             <div class="card-content">
                 <div class="music-player-placeholder">
-                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/7p2GUA0ShGenHoqeIhTg5i?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                     <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/7p2GUA0ShGenHoqeIhTg5i?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -366,14 +383,11 @@
     </div>
     
     <script>
-        // Simple JavaScript to display the current time dynamically
         function updateTime() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
             document.getElementById('current-time').textContent = timeString;
         }
-
-        // Update time immediately and then every minute
         updateTime();
         setInterval(updateTime, 60000); 
     </script>
